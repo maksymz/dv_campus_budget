@@ -200,9 +200,9 @@ SELECT * FROM user WHERE user_group_id IN (2, 3);
 
 SELECT * FROM purchased_item WHERE purchased_at BETWEEN '2019-11-01' AND '2019-11-30';
 
-SELECT * FROM user WHERE user_name LIKE "%Smith%";
+SELECT * FROM user WHERE user_name LIKE '%Smith%';
 
-SELECT * FROM user WHERE user_name LIKE "%Smith";
+SELECT * FROM user WHERE user_name LIKE '%Smith';
 
 SELECT * FROM user_group, user;
 
@@ -359,3 +359,16 @@ FROM tag AS t1
      LEFT JOIN user as u2
        ON t2.user_id = u2.user_id
 WHERE u1.email = u2.email OR u1.user_group_id = u2.user_group_id;
+
+# Add indexes
+ALTER TABLE purchased_item ADD INDEX `PURCHASED_ITEM_PURCHASED_ITEM` (purchased_item);
+
+# Actually wrong, because emails must not repeat
+ALTER TABLE user ADD INDEX `USER_EMAIL` (email);
+
+SELECT SQL_NO_CACHE * FROM user WHERE email = 'damonwhitley@example.com';
+
+ALTER TABLE user DROP INDEX `USER_EMAIL`;
+
+# Create unique index
+ALTER TABLE user ADD UNIQUE INDEX `USER_EMAIL`  (email);
