@@ -371,4 +371,6 @@ SELECT SQL_NO_CACHE * FROM user WHERE email = 'damonwhitley@example.com';
 ALTER TABLE user DROP INDEX `USER_EMAIL`;
 
 # Create unique index
-ALTER TABLE user ADD UNIQUE INDEX `USER_EMAIL`  (email);
+ALTER TABLE user ADD UNIQUE INDEX `USER_EMAIL` (email);
+
+SELECT SQL_NO_CACHE * FROM purchased_item WHERE price > 10000;
