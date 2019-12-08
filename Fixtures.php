@@ -17,12 +17,12 @@ class Fixtures
 
         try {
             $connection->beginTransaction();
-
             $this->cleanup();
+            $connection->commit();
 
+            $connection->beginTransaction();
             $this->generateUsers(2000);
             $this->generatePurchases();
-
             $connection->commit();
         } catch (Exception $e) {
             $connection->rollBack();
